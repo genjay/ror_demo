@@ -1,0 +1,33 @@
+<%= form_for(@cardtime) do |f| %>
+  <% if @cardtime.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cardtime.errors.count, "error") %> prohibited this cardtime from being saved:</h2>
+
+      <ul>
+      <% @cardtime.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ou_id %><br>
+    <%= f.number_field :ou_id %>
+  </div>
+  <div class="field">
+    <%= f.label :cardno %><br>
+    <%= f.text_field :cardno %>
+  </div>
+  <div class="field">
+    <%= f.label :cardtime %><br>
+    <%= f.text_field :cardtime %>
+  </div>
+  <div class="field">
+    <%= f.label :up_data %><br>
+    <%= f.text_area :up_data %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

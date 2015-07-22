@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Cardtimes</h1>
+
+<p>
+  範例：上傳文字檔，匯入cardtime.up_data
+</p>
+
+<h2>Import Data</h2>
+
+<%= form_tag import_cardtimes_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ou</th>
+      <th>Cardno</th>
+      <th>Cardtime</th>
+      <th>Up data</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cardtimes.each do |cardtime| %>
+      <tr>
+        <td><%= cardtime.ou_id %></td>
+        <td><%= cardtime.cardno %></td>
+        <td><%= cardtime.cardtime %></td>
+        <td><%= cardtime.up_data %></td>
+        <td><%= link_to 'Show', cardtime %></td>
+        <td><%= link_to 'Edit', edit_cardtime_path(cardtime) %></td>
+        <td><%= link_to 'Destroy', cardtime, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cardtime', new_cardtime_path %>

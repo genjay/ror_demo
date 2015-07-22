@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ou:</strong>
+  <%= @cardtime.ou_id %>
+</p>
+
+<p>
+  <strong>Cardno:</strong>
+  <%= @cardtime.cardno %>
+</p>
+
+<p>
+  <strong>Cardtime:</strong>
+  <%= @cardtime.cardtime %>
+</p>
+
+<p>
+  <strong>Up data:</strong>
+  <%= @cardtime.up_data %>
+</p>
+
+<%= link_to 'Edit', edit_cardtime_path(@cardtime) %> |
+<%= link_to 'Back', cardtimes_path %>
