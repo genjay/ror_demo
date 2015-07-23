@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Users</h1>
+<h2> 一、用checkbox 刪除</h2>
+<h2> 二、全選、反選 (script)</h2>
+<script type="text/javascript"> 
+function check_all(obj,cName) 
+{ 
+    var checkboxs = document.getElementsByName(cName); 
+    for(var i=0;i<checkboxs.length;i++){
+       if(checkboxs[i].checked == true)
+         checkboxs[i].checked = false;
+       else checkboxs[i].checked = true; } 
+} 
+</script>
+
+<%= link_to 'New User', new_user_path %>
+<%= link_to '自動增加User', seed_users_path, method: :post %>
+<hr>
+<%= form_tag multi_destroy_users_path, method: :delete do %>
+  <%= submit_tag "刪除所選" %>
+  <table> 
+    <thead>
+      <tr>
+        <th><input name='all_c' type='checkbox' onclick="check_all(this,'ids[]')" /></th>
+        <th>Uid</th>
+        <th>Name</th>
+        <th>Birthday</th>
+        <th> <colspan="3"></th>
+      </tr> 
+    </thead>
+    <tbody>
+      <tr><hr></tr>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= check_box_tag "ids[]", user.id%></td> 
+          <td><%= user.uid %></td>
+          <td><%= user.name %></td>
+          <td><%= user.birthday %></td>
+          <td><%= link_to 'Show', user %></td>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<br>
+
