@@ -1,0 +1,40 @@
+<%= form_for(@worktype) do |f| %>
+  <% if @worktype.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@worktype.errors.count, "error") %> prohibited this worktype from being saved:</h2>
+
+      <ul>
+      <% @worktype.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :代號 %><br>
+    <%= f.text_field :uid %>
+  </div>
+  <div class="field">
+    <%= f.label :名稱 %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :上班  %>
+    <%= f.time_field :begin_at %> 
+    <%= f.label :下班 %> 
+    <%= f.time_field :end_at %>
+  </div> 
+  <hr>
+  <p> 以下是nested form </p>
+  <%= f.fields_for :workrests do |x| %>
+    <%= x.label :rest_minutes %>
+    <%= x.text_field :rest_minutes %>
+    <%= x.check_box  :_destroy %>  remove(如果remove要做成超聯結方式，需要用到javascript)
+    <br>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

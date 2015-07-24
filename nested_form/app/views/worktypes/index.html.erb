@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>班別維護</h1>
+<h1>neated form</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>代號</th>
+      <th>班別名稱</th>
+      <th>上班時間</th>
+      <th>下班時間</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @worktypes.each do |worktype| %>
+      <tr>
+        <td><%= worktype.uid %></td>
+        <td><%= worktype.name %></td>
+        <td><%= worktype.begin_at %></td>
+        <td><%= worktype.end_at %></td>
+        <td><%= link_to 'Show', worktype %></td>
+        <td><%= link_to 'Edit', edit_worktype_path(worktype) %></td>
+        <td><%= link_to 'Destroy', worktype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Worktype', new_worktype_path %>

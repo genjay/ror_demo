@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  worktype_id: 1
+  begin_at: 2015-07-24 16:33:35
+  rest_minutes: 1
+
+two:
+  worktype_id: 1
+  begin_at: 2015-07-24 16:33:35
+  rest_minutes: 1
