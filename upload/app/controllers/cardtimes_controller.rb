@@ -3,11 +3,12 @@ class CardtimesController < ApplicationController
   
   def import
     x = params[:file]
+    st = Time.now
     # render :text => x.path
     # return
     Cardtime.delete_all
     Cardtime.import(params[:file])
-    redirect_to cardtimes_path, notice: "#{Cardtime.count}Products imported."
+    redirect_to cardtimes_path, notice: "#{Time.now - st}秒 #{Cardtime.count}筆 imported."
   end
 
   # GET /cardtimes
