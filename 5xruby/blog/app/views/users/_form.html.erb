@@ -1,0 +1,9 @@
+<%= simple_form_for(@user) do |f| %>
+
+  <%= f.input :name, label:false, placeholder:'姓名' %>
+  <%= f.input :email, label:false, placeholder:'信箱' %> 
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

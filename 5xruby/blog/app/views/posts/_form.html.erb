@@ -1,0 +1,10 @@
+<%= simple_form_for(@post) do |f| %>
+
+  <%= f.input :content %>
+  <%= f.association :user %>  
+  <%= f.input :cover_image, as: :file %>  
+ 
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

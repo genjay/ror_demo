@@ -1,0 +1,18 @@
+<h1> 商品列表 </h1>
+
+<ul> 
+<% @products.each do |f| %>
+  <li>
+  	<%= link_to f.id, product_path(f.id) %>
+    名稱<%= f.name %>
+    <%= link_to '編輯', edit_product_path(f) %>
+    <%= link_to '刪除', product_path(f), method: :delete ,data:{confirm:'確定嗎？'} %>
+	</li>
+
+<% end %>
+</ul>
+
+
+<%= link_to '新增',new_product_path %>
+<%= link_to 'add', new_product_url %>
+<%= link_to '回上頁', :back %>

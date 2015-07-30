@@ -1,0 +1,11 @@
+<% if @product.errors.any? %>
+  <%= @product.errors.full_messages %>
+<% end %>
+ 
+
+<%= simple_form_for(@product) do |f| %>
+  <%= f.input :name %>  
+	<%= f.input(:description) %> 
+	<%= f.input :price %> 
+	<%= f.submit %>
+<% end %>
