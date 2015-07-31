@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
   # get 'cardtimes/import' => 'import#cardtimes'
+  root 'cardtimes#index'
   resources :cardtimes do 
     # member { post :import }
     collection { post :import}
+    collection { post :import_b}
+    collection { post :import_c}
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

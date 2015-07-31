@@ -10,8 +10,19 @@
 
 <%= form_tag import_cardtimes_path, multipart: true do %>
   <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
+  <%= submit_tag "方法一", data: { disable_with: "執行中" } %>
 <% end %>
+<hr>
+<%= form_tag import_b_cardtimes_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "方法二", data: { disable_with: "執行中" } %>
+<% end %>
+<hr>
+<%= form_tag import_c_cardtimes_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "方法三", data: { disable_with: "執行中" } %>
+<% end %>
+<hr>
 
 <table>
   <thead>
