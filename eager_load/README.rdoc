@@ -1,0 +1,34 @@
+請參考 http://blog.arkency.com/2013/12/rails4-preloading/
+做操作，主要了解 
+includes
+preload
+eager_load 
+用法及差別
+
+
+User.includes(:addresses)
+User.preload(:addresses)
+在 rails c 下，比較二種用的sql，及產生物件，結果一樣
+
+User.eager_load(:addresses)
+# 主要用left join 組成sql
+
+User.includes(:addresses).where("addresses.country = ?", "Poland")
+# 不能執行
+User.eager_load(:addresses).where("addresses.country = ?", "Poland")
+# 可以執行 
+User.preload(:addresses).where("addresses.country = ?", "Poland")
+# 不能執行
+
+r = User.joins(:addresses).where("addresses.country = ?", "Poland").includes(:addresses)
+# 組成一個sql, 在產生 r物件
+r[0]
+r[0].addresses
+
+r = User.joins(:addresses).where("addresses.country = ?", "Poland").preload(:addresses)
+# 組成二個sql，再產生 r物件
+
+  has_many :polish_addresses, conditions: {country: "Poland"}, class_name: "Address"
+#conditions: 需改成 ->
+#{country: "Poland"} 需改成 { where country: "Poland"}
+
