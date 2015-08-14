@@ -1,24 +1,6 @@
 class Cardtime < ActiveRecord::Base
 	require 'CSV'
 
-	def self.create_5x(str_a,arr_b) 
-    cols = str_a.dup 
-    now = Time.now.to_s[0..15] 
-    rows = []
-
-    arr_b.each do |i|
-    	x = '(' << i.dup << now << now << ')'
-    	rows = rows << x 
-    end
-
-    
-    cols << 'created_at' << 'updated_at'
-    cols = cols.join(',')
-    rows = rows.join(',')
-
-		return "INSERT INTO #{table_name} (#{cols}) VALUES (#{rows})"
-	end
-
 	def self.import(file)
 		# 將檔案資料存成 array在丟給 create 
 		# 跟foreach 內就執行 create，速度差不多 
@@ -26,9 +8,9 @@ class Cardtime < ActiveRecord::Base
 		data = []
 	  CSV.foreach(file.path, headers: false) do |row|
 			# Cardtime.create(up_data: row)
-			data<<{up_data: row}
+			data<<{up_data: row,cardno: row}
 	  end # end CSV.foreach
-	  Cardtime.create(data)
+	  Cardtime.f1_create(data)
 
 	end # end self.import(file)
 
@@ -66,5 +48,29 @@ class Cardtime < ActiveRecord::Base
 		  return v.size
 		end	
 	end # end self.import(file)
+
+
+	def self.f1_create(attributes = nil,bat_size=200)
+		columns = attributes[0].keys 
+    conn = ActiveRecord::Base.connection
+		values,rows = '',''
+		attributes.each_with_index do |h,i|
+			h.each do |k,v| 
+			  values << "'#{v.join(',')}',"
+		  end
+		  rows << "(#{values.chop}),"
+		  values =''
+		  if rows.size % bat_size == 0
+				sql = "INSERT INTO #{table_name} (#{columns.join(',')}) VALUES #{rows.chop}"
+		  	conn.execute sql
+		  	rows =''
+		  end
+		end
+    if rows.size > 0
+		  sql = "INSERT INTO #{table_name} (#{columns.join(',')}) VALUES #{rows.chop}"
+			conn.execute(sql)
+		end
+
+	end
 
 end
